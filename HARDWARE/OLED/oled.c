@@ -231,8 +231,39 @@ void OLED_Init(void)
 	OLED_Clear();
 }  
 
-
-
+const unsigned char PPG_wave_fig[34]= //0-16
+{	0x00,0x00,
+	0x01,0x00,
+	0x03,0x00,
+	0x07,0x00,
+	0x0f,0x00,
+	0x1f,0x00,
+	0x3f,0x00,
+	0x7f,0x00,
+	0xff,0x00,
+	0xff,0x01,
+	0xff,0x03,
+	0xff,0x07,
+	0xff,0x0f,
+	0xff,0x1f,
+	0xff,0x3f,
+	0xff,0x7f,
+	0xff,0xff};
+	
+void OLED_wave(u8 Wave_sum)
+{
+	static u8 i;		  	
+	OLED_WR_Byte (0xb0,OLED_CMD);    						//设置页地址（0）
+	OLED_WR_Byte ((i & 0x0f),OLED_CMD);      				//设置显示位置—列低地址
+	OLED_WR_Byte (((i & 0xf0) >> 4) |0x10,OLED_CMD);      	//设置显示位置—列高地址   
+	OLED_WR_Byte(PPG_wave_fig[Wave_sum*2],OLED_DATA); 
+	OLED_WR_Byte (0xb1,OLED_CMD);    						//设置页地址（1）
+	OLED_WR_Byte ((i & 0x0f),OLED_CMD);      				//设置显示位置—列低地址
+	OLED_WR_Byte (((i & 0xf0) >> 4) |0x10,OLED_CMD);      	//设置显示位置—列高地址 
+	OLED_WR_Byte(PPG_wave_fig[Wave_sum*2+1],OLED_DATA);		//显示数据,PPG_wave_fig[n]的值跟OLED寄存器配置的扫描方式相关
+	i++;
+	if(i>127) i=0;
+}
 
 
 

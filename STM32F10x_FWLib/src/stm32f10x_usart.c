@@ -592,11 +592,16 @@ void USART_LINCmd(USART_TypeDef* USARTx, FunctionalState NewState)
 void USART_SendData(USART_TypeDef* USARTx, uint16_t Data)
 {
   /* Check the parameters */
+  printf("[debug] data is %x %s  %d:\r\n",Data,  __FILE__, __LINE__);
+
   assert_param(IS_USART_ALL_PERIPH(USARTx));
   assert_param(IS_USART_DATA(Data)); 
-    
+  printf("[debug] data is %x %s  %d:\r\n",Data ,  __FILE__, __LINE__);
+  
   /* Transmit Data */
   USARTx->DR = (Data & (uint16_t)0x01FF);
+  printf("[debug] data is %x %s  %d:\r\n",USARTx->DR ,  __FILE__, __LINE__);
+
 }
 
 /**
