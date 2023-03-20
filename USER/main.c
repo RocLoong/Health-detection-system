@@ -34,22 +34,25 @@ int8_t ch_spo2_valid;   		//算法执行成功标志位
 int8_t ch_hr_valid;    			
 
 extern u8 senor_Flag;
+u8 high_pressure = 0,low_pressure = 0,hrv = 0;
 
 int main(void)
 { 
 	NVIC_Configuration();     	//各函数初始化
 	delay_init();	    		  
-	uart_init(115200);
-	uart_hrv_init();
+	USART_Config();
 	LED_Init();
 	OLED_Init();
 	max30102_init();
-	
 
+	// 开启血压检测模块
+	Usart_SendByte(USART3, 0x8a);
+	
 	while(1)
 	{
 		// max30102_display();
 		hrv_display();
+		delay_ms(100);
 	}
 }
 
@@ -153,11 +156,6 @@ void max30102_display()
 
 void hrv_display()
 {
-	debug();
-	Usart_SendByte(USART2, 0x8a);
-	debug();
-
-
 	//	    OLED_ShowNum(100,48,USART_HRV_RX_BUF[0],3,16,1);	//字节头
 	// 		OLED_ShowNum(10,20,USART_HRV_RX_BUF[65],2,16,1);	//心率
 	// 		OLED_ShowNum(50,20,USART_HRV_RX_BUF[66],2,16,1);	//血氧
@@ -165,23 +163,20 @@ void hrv_display()
 	// 		OLED_ShowNum(10,48,USART_HRV_RX_BUF[71],3,16,1);	//收缩压
 	// 		OLED_ShowNum(50,48,USART_HRV_RX_BUF[72],3,16,1);	//舒张压
 	char str[30];
-	debug();
+	if(USART_HRV_RX_BUF[71] != 0) high_pressure = USART_HRV_RX_BUF[71];
+	if(USART_HRV_RX_BUF[72] != 0) low_pressure = USART_HRV_RX_BUF[72];
+	if(USART_HRV_RX_BUF[72] != 0) hrv =  USART_HRV_RX_BUF[76];
+	sprintf((char *)str," High :   Low:  ");
+	OLED_ShowString(0,0,str,16);
+	OLED_Refresh_Gram();		//更新显示到OLED	
 	if(senor_Flag)
 	{
-		sprintf((char *)str,"  :   Low:  ");
-		OLED_ShowString(0,0,str,16);
-		OLED_Refresh_Gram();		//更新显示到OLED	
-
-		sprintf((char *)str,"%3d  %3d",USART_HRV_RX_BUF[71],USART_HRV_RX_BUF[72]);
+		senor_Flag=0;
+		sprintf((char *)str,"%3d  %3d",high_pressure,low_pressure);
 		OLED_ShowString(0,20,str,24);
 		OLED_Refresh_Gram();		//更新显示到OLED	
-
 	}
-	 
-	printf("hr = %d\r\n",USART_HRV_RX_BUF[65]);
-	printf("high pressure = %d\r\n",USART_HRV_RX_BUF[71]);
-	printf("low pressure = %d\r\n",USART_HRV_RX_BUF[72]);
-	printf("hrv = %d\r\n",USART_HRV_RX_BUF[77]);
-	// 
+	
+
 }
 
