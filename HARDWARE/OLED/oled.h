@@ -2,7 +2,7 @@
  * @Author: Rocloong 63897185+RocLoong@users.noreply.github.com
  * @Date: 2023-03-10 13:25:17
  * @LastEditors: Rocloong 63897185+RocLoong@users.noreply.github.com
- * @LastEditTime: 2023-03-13 18:45:05
+ * @LastEditTime: 2023-03-22 16:07:33
  * @FilePath: \USERe:\STM32\MAX30102\MAX30102\HARDWARE\OLED\oled.h
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -14,12 +14,12 @@
 		    						  
 //-----------------OLED端口定义----------------  					   
 #define OLED_CS 	PAout(0)
-#define OLED_RST 	PAout(2)
+#define OLED_RST 	PAout(5)
 #define OLED_RS 	PAout(1)
 
 //使用4线串行接口时使用 
 #define OLED_SCLK PAout(4)
-#define OLED_SDIN PAout(3)
+#define OLED_SDIN PAout(6)
 		     
 #define OLED_CMD  0	//写命令
 #define OLED_DATA 1	//写数据

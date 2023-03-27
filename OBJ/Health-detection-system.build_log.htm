@@ -1,0 +1,124 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.32.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 RocLoong, 1, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.32.0.0
+Toolchain Path:  D:\Code\keil\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.32.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.8.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+E:\Git\Repository\Health-detection-system\USER\IIC.uvprojx
+Project File Date:  03/25/2023
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Code\keil\ARM\ARMCC\Bin'
+Rebuild target 'Target 1'
+compiling algorithm.c...
+compiling key.c...
+compiling led.c...
+compiling main.c...
+main.c(29): warning:  #1295-D: Deprecated declaration hrv_display - give arg types
+  void hrv_display();
+main.c(30): warning:  #1295-D: Deprecated declaration max30102_display - give arg types
+  void max30102_display();
+main.c(31): warning:  #1295-D: Deprecated declaration beep_init - give arg types
+  void beep_init();
+main.c(50): warning:  #177-D: variable "un_min"  was declared but never referenced
+  	uint32_t un_min, un_max; 	//原始数据的最大/最小值
+main.c(50): warning:  #177-D: variable "un_max"  was declared but never referenced
+  	uint32_t un_min, un_max; 	//原始数据的最大/最小值
+main.c(51): warning:  #177-D: variable "Wave_Range"  was declared but never referenced
+  	uint32_t Wave_Range;		//用于显示计算倍率
+main.c(52): warning:  #177-D: variable "i"  was declared but never referenced
+  	u16 i;						//
+main.c(54): warning:  #177-D: variable "Wave_sum"  was declared but never referenced
+  	s8 Wave_sum;				//OLED波形大小
+main.c(57): warning:  #177-D: variable "dis_hr"  was declared but never referenced
+  	u8 dis_hr=0,dis_spo2=0;
+main.c(57): warning:  #177-D: variable "dis_spo2"  was declared but never referenced
+  	u8 dis_hr=0,dis_spo2=0;
+main.c(58): warning:  #177-D: variable "wave"  was declared but never referenced
+  	u8 wave;
+main.c(191): error:  #77-D: this declaration has no storage class or type specifier
+  inline void max30102_display()
+main.c(191): error:  #65: expected a ";"
+  inline void max30102_display()
+main.c(234): warning: At end of source:  #12-D: parsing restarts here after previous syntax error
+main.c: 12 warnings, 2 errors
+compiling stm32f10x_it.c...
+compiling delay.c...
+compiling myiic.c...
+compiling sys.c...
+compiling system_stm32f10x.c...
+compiling max30102.c...
+compiling hc05.c...
+..\HARDWARE\HC05\hc05.c(28): warning:  #223-D: function "USART2_Init" declared implicitly
+      USART2_Init(9600);	//鍒濆鍖栦覆鍙?2涓?:9600,娉㈢壒鐜?.
+..\HARDWARE\HC05\hc05.c(30): warning:  #223-D: function "delay_ms" declared implicitly
+      delay_ms(1500);
+..\HARDWARE\HC05\hc05.c(36): warning:  #223-D: function "u2_printf" declared implicitly
+          u2_printf("AT\r\n");		//鍙戦�丄T娴嬭瘯鎸囦护
+..\HARDWARE\HC05\hc05.c(66): warning:  #223-D: function "delay_ms" declared implicitly
+  		delay_ms(10);
+..\HARDWARE\HC05\hc05.c(67): warning:  #223-D: function "u2_printf" declared implicitly
+  		u2_printf("AT+ROLE?\r\n");	//鏌ヨ瑙掕壊
+..\HARDWARE\HC05\hc05.c(99): warning:  #223-D: function "delay_ms" declared implicitly
+  		delay_ms(10);
+..\HARDWARE\HC05\hc05.c(100): warning:  #223-D: function "u2_printf" declared implicitly
+  		u2_printf("%s\r\n",atstr);	//鍙戦�丄T瀛楃涓?
+..\HARDWARE\HC05\hc05.c: 7 warnings, 0 errors
+compiling oled.c...
+compiling usart.c...
+..\SYSTEM\usart\usart.c(213): error:  #29: expected an expression
+  	for(int i = 0; i < USART_HRV_LEN; i++)
+..\SYSTEM\usart\usart.c(213): error:  #20: identifier "i" is undefined
+  	for(int i = 0; i < USART_HRV_LEN; i++)
+..\SYSTEM\usart\usart.c: 0 warnings, 2 errors
+assembling startup_stm32f10x_md.s...
+compiling core_cm3.c...
+compiling stm32f10x_gpio.c...
+compiling misc.c...
+compiling stm32f10x_rcc.c...
+compiling stm32f10x_usart.c...
+"..\OBJ\Health-detection-system.axf" - 4 Error(s), 19 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.7.0.pack
+                ARM.CMSIS.5.7.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.4.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.0.pack
+                Keil.STM32F1xx_DFP.2.4.0
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  D:\Code\keil\ARM\CMSIS\5.7.0\CMSIS\Core\Include
+  D:\Code\keil\Keil\STM32F1xx_DFP\2.4.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.4.0
+Target not created.
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>

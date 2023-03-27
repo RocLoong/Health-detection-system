@@ -10,8 +10,60 @@
     "files": [],
     "folders": [
       {
-        "name": "::CMSIS",
-        "files": [],
+        "name": "USER",
+        "files": [
+          {
+            "path": "main.c"
+          },
+          {
+            "path": "stm32f10x_it.c"
+          },
+          {
+            "path": "system_stm32f10x.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "HARDWARE",
+        "files": [
+          {
+            "path": "../HARDWARE/LED/led.c"
+          },
+          {
+            "path": "../HARDWARE/IIC/myiic.c"
+          },
+          {
+            "path": "../HARDWARE/IIC/max30102.c"
+          },
+          {
+            "path": "../HARDWARE/IIC/algorithm.c"
+          },
+          {
+            "path": "../HARDWARE/OLED/oled.c"
+          },
+          {
+            "path": "../HARDWARE/HC05/hc05.c"
+          },
+          {
+            "path": "../HARDWARE/KEY/key.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "SYSTEM",
+        "files": [
+          {
+            "path": "../SYSTEM/delay/delay.c"
+          },
+          {
+            "path": "../SYSTEM/sys/sys.c"
+          },
+          {
+            "path": "../SYSTEM/usart/usart.c"
+          }
+        ],
         "folders": []
       },
       {
@@ -45,54 +97,8 @@
         "folders": []
       },
       {
-        "name": "HARDWARE",
-        "files": [
-          {
-            "path": "../HARDWARE/LED/led.c"
-          },
-          {
-            "path": "../HARDWARE/IIC/myiic.c"
-          },
-          {
-            "path": "../HARDWARE/IIC/max30102.c"
-          },
-          {
-            "path": "../HARDWARE/IIC/algorithm.c"
-          },
-          {
-            "path": "../HARDWARE/OLED/oled.c"
-          }
-        ],
-        "folders": []
-      },
-      {
-        "name": "SYSTEM",
-        "files": [
-          {
-            "path": "../SYSTEM/delay/delay.c"
-          },
-          {
-            "path": "../SYSTEM/sys/sys.c"
-          },
-          {
-            "path": "../SYSTEM/usart/usart.c"
-          }
-        ],
-        "folders": []
-      },
-      {
-        "name": "USER",
-        "files": [
-          {
-            "path": "main.c"
-          },
-          {
-            "path": "stm32f10x_it.c"
-          },
-          {
-            "path": "system_stm32f10x.c"
-          }
-        ],
+        "name": "::CMSIS",
+        "files": [],
         "folders": []
       }
     ]
@@ -257,9 +263,9 @@
           "../HARDWARE/IIC",
           "../HARDWARE/OLED",
           "../HARDWARE/LED",
-          ".cmsis/include",
-          "RTE/_Target 1",
-          ".eide/deps"
+          "../HARDWARE/HC05",
+          "../HARDWARE/KEY",
+          "RTE/_Target 1"
         ],
         "libList": [],
         "sourceDirList": [],

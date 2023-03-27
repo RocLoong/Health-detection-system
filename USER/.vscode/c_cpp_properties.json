@@ -12,6 +12,8 @@
                 "e:\\Git\\Repository\\Health-detection-system\\HARDWARE\\IIC",
                 "e:\\Git\\Repository\\Health-detection-system\\HARDWARE\\OLED",
                 "e:\\Git\\Repository\\Health-detection-system\\HARDWARE\\LED",
+                "e:\\Git\\Repository\\Health-detection-system\\HARDWARE\\HC05",
+                "e:\\Git\\Repository\\Health-detection-system\\HARDWARE\\KEY",
                 "e:\\Git\\Repository\\Health-detection-system\\STM32F10x_FWLib\\src"
             ],
             "defines": [
@@ -90,7 +92,8 @@
                 "__yield()=",
                 "__vfp_status(x,y)=0"
             ],
-            "intelliSenseMode": "${default}"
+            "intelliSenseMode": "${default}",
+            "compileCommands": "${workspaceFolder}/build/Target 1/compile_commands.json"
         }
     ],
     "version": 4

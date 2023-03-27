@@ -5,40 +5,13 @@
         }
     ],
     "settings": {
-        "files.autoGuessEncoding": true,
-        "C_Cpp.default.configurationProvider": "cl.eide",
-        "C_Cpp.errorSquiggles": "Disabled",
         "files.associations": {
-            ".eideignore": "ignore",
-            "*.a51": "a51",
-            "*.h": "c",
-            "*.c": "c",
-            "*.hxx": "cpp",
-            "*.hpp": "cpp",
-            "*.c++": "cpp",
-            "*.cpp": "cpp",
-            "*.cxx": "cpp",
-            "*.cc": "cpp"
+            "usart.h": "c",
+            "main.h": "c",
+            "oled.h": "c"
         },
-        "[yaml]": {
-            "editor.insertSpaces": true,
-            "editor.tabSize": 4,
-            "editor.autoIndent": "advanced"
-        }
+        "RTT_Studio.Build.Parallel_Jobs": "20",
+        "RTT_Studio.Env_Location": "D:/RT-ThreadStudio/platform/env_released/env"
     },
-    "extensions": {
-        "recommendations": [
-            "cl.eide",
-            "keroc.hex-fmt",
-            "xiaoyongdong.srecord",
-            "hars.cppsnippets",
-            "zixuanwang.linkerscript",
-            "redhat.vscode-yaml",
-            "IBM.output-colorizer",
-            "cschlosser.doxdocgen",
-            "ms-vscode.vscode-serial-monitor",
-            "dan-c-underwood.arm",
-            "marus25.cortex-debug"
-        ]
-    }
+    "extensions": {}
 }
