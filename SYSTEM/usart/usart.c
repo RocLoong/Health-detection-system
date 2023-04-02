@@ -90,7 +90,7 @@ u16 HC05_RX_STA;
 void uart_hc05_init(u32 bound){
     //GPIO端口设置
   	  USART_InitTypeDef USART_InitStructure;    
-  NVIC_InitTypeDef NVIC_InitStructure;     
+    NVIC_InitTypeDef NVIC_InitStructure;     
     GPIO_InitTypeDef GPIO_InitStructure;    //声明一个结构体变量，用来初始化GPIO    
    //使能串口的RCC时钟    
    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA , ENABLE); //使能UART3所在GPIOB的时钟    
@@ -142,13 +142,13 @@ void uart_hc05_init(u32 bound){
 void USART2_IRQHandler(void)
 {
 
-  u8 Res;
-  if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)  //接收中断
-  {
-    printf("[debug] %s  %d:  Res = %x\r\n",__FILE__, __LINE__,Res);																	
-    Res =USART_ReceiveData(USART2);	//读取接收到的数据
-    USART_SendData(USART1,Res);		//往串口1发送数据
-  }
+  // u8 Res;
+  // if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)  //接收中断
+  // {
+  //   printf("[debug] %s  %d:  Res = %x\r\n",__FILE__, __LINE__,Res);																	
+  //   Res =USART_ReceiveData(USART2);	//读取接收到的数据
+  //   USART_SendData(USART1,Res);		//往串口1发送数据
+  // }
 }
 
 

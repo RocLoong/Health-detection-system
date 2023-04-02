@@ -2,7 +2,7 @@
  * @Author: Rocloong 63897185+RocLoong@users.noreply.github.com
  * @Date: 2023-03-15 20:43:36
  * @LastEditors: Rocloong 63897185+RocLoong@users.noreply.github.com
- * @LastEditTime: 2023-03-27 21:31:53
+ * @LastEditTime: 2023-03-31 20:49:18
  * @FilePath: \USER\main.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -139,18 +139,19 @@ int main(void)
 			}
 			
 			printf("Heart:%3d Spo2 %3d\r\n",dis_hr,dis_spo2);
+			
 			// 将数据通过hc05发送到手机端
+			memset(str,0,sizeof(str));
 			sprintf((char *)str,"Heart:%3d Spo2 %3d\r\n",dis_hr,dis_spo2);
-			hc05_send_str(str);
+			hc05_send_str((const char *)str);
 
 			OLED_Refresh_Gram();//更新显示到OLED	
 			break;
 		case DISPLAY_PRESSURE:
-			hrv_display();
+			pressure_display();
 			break;
 		case DISPLAY_HRV:
-			OLED_ShowString(0,0,"C",16);
-			OLED_Refresh_Gram();
+			hrv_display();
 			break;
 		default:
 			break;
@@ -169,19 +170,12 @@ inline void max30102_display()
 
 }
 
-
-void hrv_display()
+void pressure_display()
 {
-	//	    OLED_ShowNum(100,48,USART_HRV_RX_BUF[0],3,16,1);	//字节头
-	// 		OLED_ShowNum(10,20,USART_HRV_RX_BUF[65],2,16,1);	//心率
-	// 		OLED_ShowNum(50,20,USART_HRV_RX_BUF[66],2,16,1);	//血氧
-	// 		OLED_ShowNum(100,20,USART_HRV_RX_BUF[67],2,16,1);	//微循环
-	// 		OLED_ShowNum(10,48,USART_HRV_RX_BUF[71],3,16,1);	//收缩压
-	// 		OLED_ShowNum(50,48,USART_HRV_RX_BUF[72],3,16,1);	//舒张压
+
 	char str[30];
 	if(USART_HRV_RX_BUF[71] != 0) high_pressure = USART_HRV_RX_BUF[71];
-	if(USART_HRV_RX_BUF[72] != 0) low_pressure = USART_HRV_RX_BUF[72];
-	if(USART_HRV_RX_BUF[72] != 0) hrv =  USART_HRV_RX_BUF[76];
+	if(USART_HRV_RX_BUF[72] != 0) low_pressure = USART_HRV_RX_BUF[72];	
 	sprintf((char *)str," High :   Low:  ");
 	OLED_ShowString(0,0,str,16);
 	OLED_Refresh_Gram();		//更新显示到OLED	
@@ -191,8 +185,39 @@ void hrv_display()
 		sprintf((char *)str,"%3d  %3d",high_pressure,low_pressure);
 		OLED_ShowString(0,20,str,24);
 		OLED_Refresh_Gram();		//更新显示到OLED	
-	}
 
+		// 将血压数据发送到蓝牙
+		memset(str,0,sizeof(str));
+		sprintf((char *)str,"High:%3d Low %3d\r\n",high_pressure,low_pressure);
+		hc05_send_str((const char *)str);
+	}
+}
+
+void hrv_display()
+{
+	//	    OLED_ShowNum(100,48,USART_HRV_RX_BUF[0],3,16,1);	//字节头
+	// 		OLED_ShowNum(10,20,USART_HRV_RX_BUF[65],2,16,1);	//心率
+	// 		OLED_ShowNum(50,20,USART_HRV_RX_BUF[66],2,16,1);	//血氧
+	// 		OLED_ShowNum(100,20,USART_HRV_RX_BUF[67],2,16,1);	//微循环
+	// 		OLED_ShowNum(10,48,USART_HRV_RX_BUF[71],3,16,1);	//收缩压
+	// 		OLED_ShowNum(50,48,USART_HRV_RX_BUF[72],3,16,1);	//舒张压
+	char str[10];
+	if(USART_HRV_RX_BUF[72] != 0) hrv =  USART_HRV_RX_BUF[76];
+	sprintf((char *)str," HRV  ");
+	OLED_ShowString(0,0,str,16);
+
+	if(senor_Flag)
+	{
+		senor_Flag=0;
+		sprintf((char *)str,"%3d ",hrv);
+		OLED_ShowString(0,20,str,24);
+		OLED_Refresh_Gram();		//更新显示到OLED	
+
+		// 将血压数据发送到蓝牙
+		memset(str,0,sizeof(str));
+		sprintf((char *)str,"HRV:%3d \r\n",hrv);
+		hc05_send_str((const char *)str);
+	}
 }
 
 void beep_init()

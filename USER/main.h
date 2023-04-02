@@ -30,6 +30,7 @@
 #define BEEP PBout(12)
 #define SPO2 0
 void hrv_display();
+void pressure_display();
 void max30102_display();
 void beep_init();
 // enum to switch between different 3 DISPLAY                            

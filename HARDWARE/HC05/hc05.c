@@ -7,22 +7,24 @@ u8 HC05_Init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 
-    RCC_APB2PeriphClockCmd(RCC_STATE,ENABLE);	//使能PORTA C时钟	
+    RCC_APB2PeriphClockCmd(RCC_EN,ENABLE);	//使能PORTA C时钟	
 
-    GPIO_InitStructure.GPIO_Pin = STATE_Pin;				 // 端口配置
+    GPIO_InitStructure.GPIO_Pin = EN_Pin;				 // 端口配置
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; 		 //上拉输入
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;		 //IO口速度为50MHz
     GPIO_Init(GPIOA, &GPIO_InitStructure);					 //根据设定参数初始化PA4
 
-	uart_hc05_init(38400);	//初始化串口2 38400波特率.
+	uart_hc05_init(9600);	//初始化串口2 38400波特率.
 	
-	hc05_send_str("AT+NAME=HC05\r\n");  // 设置蓝牙的名称为hc05
-	hc05_send_str("AT+PIN=1234\r\n");  // 设置蓝牙的密码为1234
-	hc05_send_str("AT+ROLE=1\r\n");    // 设置蓝牙的角色为从机
-	hc05_send_str("AT+CMODE=0\r\n"); 	   // 蓝牙连接模式为任意地址连接模式
-	hc05_send_str("AT+UART=38400,0,0\r\n");     // 蓝牙通信串口波特率为1152，停止位1位，无校验位（以后正常模式都会采用这个波特率来进行通讯，AT 模式依然是 38400）
-	hc05_send_str("AT+RMAAD\r\n");     // 清空配对列表
+	// HC05_EN=1;					//KEY置高,进入AT模式
+	// hc05_send_str("AT+NAME=HC05\r\n");  // 设置蓝牙的名称为hc05
+	// hc05_send_str("AT+PIN=1234\r\n");  // 设置蓝牙的密码为1234
+	// hc05_send_str("AT+ROLE=1\r\n");    // 设置蓝牙的角色为从机
+	// hc05_send_str("AT+CMODE=0\r\n"); 	   // 蓝牙连接模式为任意地址连接模式
+	// hc05_send_str("AT+UART=38400,0,0\r\n");     // 蓝牙通信串口波特率为1152，停止位1位，无校验位（以后正常模式都会采用这个波特率来进行通讯，AT 模式依然是 38400）
+	// hc05_send_str("AT+RMAAD\r\n");     // 清空配对列表
 	
+   	HC05_EN=0;					//KEY拉低,退出AT模式
     // u8 retry=10,t;	  		 
     // u8 temp=1;
 
@@ -43,9 +45,6 @@ u8 HC05_Init(void)
     // while(retry--)
     // {
     //     HC05_EN=1;					//KEY置高,进入AT模式
-    //     delay_ms(10);
-
-    //     u2_printf("AT\r\n");		//发送AT测试指令
     //     HC05_EN=0;					//KEY拉低,退出AT模式
     //     for(t=0;t<10;t++) 			//最长等待50ms,来接收HC05模块的回应
     //     {
