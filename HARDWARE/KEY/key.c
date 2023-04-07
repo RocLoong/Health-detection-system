@@ -2,7 +2,7 @@
  * @Author: Rocloong 63897185+RocLoong@users.noreply.github.com
  * @Date: 2023-03-25 11:14:19
  * @LastEditors: Rocloong 63897185+RocLoong@users.noreply.github.com
- * @LastEditTime: 2023-03-26 10:12:19
+ * @LastEditTime: 2023-04-06 17:22:25
  * @FilePath: \USERe:\Git\Repository\Health-detection-system\HARDWARE\KEY\key.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -56,7 +56,7 @@ u8 KEY_Scan(u8 mode)
 
 u8 key_scan(void)
 {	 
-	static u8 mode = 0;
+	static u8 mode = 3;
 	if(KEY0 == 0 && KEY1 == 1 && KEY2 == 1)
 	{
 		mode = KEY0_PRES;

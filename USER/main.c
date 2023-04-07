@@ -2,7 +2,7 @@
  * @Author: Rocloong 63897185+RocLoong@users.noreply.github.com
  * @Date: 2023-03-15 20:43:36
  * @LastEditors: Rocloong 63897185+RocLoong@users.noreply.github.com
- * @LastEditTime: 2023-03-31 20:49:18
+ * @LastEditTime: 2023-04-07 10:11:16
  * @FilePath: \USER\main.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -21,6 +21,7 @@ int8_t ch_hr_valid;
 
 extern u8 senor_Flag;
 u8 high_pressure = 0,low_pressure = 0,hrv = 0;
+DISPLAY_MODE dis_mode = DISPLAY_START;
 
 int main(void)
 { 
@@ -48,19 +49,28 @@ int main(void)
 
 	maxim_max30102_read_reg(REG_REV_ID,temp);//读ID,可不要
 	n_ir_buffer_length=500; 	//更新数组长度
+
+	memset(str,0,sizeof(str));
+	sprintf((char *)str," Welcome !  ");
+	OLED_ShowString(20,20,str,16);
+	OLED_Refresh_Gram();//更新显示到OLED	
 	
 	while(1)
 	{
 		// 获取屏幕的显示模式
-		DISPLAY_MODE dis_mode = key_scan();
-
+		DISPLAY_MODE temp_mode = key_scan();
+		if ( temp_mode != dis_mode )
+		{
+			OLED_Clear();
+		}
+	
+		dis_mode = temp_mode;
 		switch (dis_mode)
 		{
 		case DISPLAY_SPO2:
 			i=0;					//重置初始值
 			un_max=0;
 			un_min=PPG_MIN_COUNT;
-			
 			for(i=100;i<500;i++)	//数组往前移100->目的是丢弃500个数组中的前面100个数组,并更新100个新采集的值
 			{
 				aun_red_buffer[i-100]=aun_red_buffer[i];
@@ -111,6 +121,7 @@ int main(void)
 			}
 			//执行算法,去直流,滤波,计算波形幅值等
 			maxim_heart_rate_and_oxygen_saturation(aun_ir_buffer, n_ir_buffer_length, aun_red_buffer, &n_sp02, &ch_spo2_valid, &n_heart_rate, &ch_hr_valid);
+			memset(str,0,sizeof(str));
 			sprintf((char *)str,"  HR:   SpO2:  ");
 			OLED_ShowString(0,0,str,16);
 			// 数据显示
@@ -171,7 +182,8 @@ inline void max30102_display()
 }
 
 void pressure_display()
-{
+{	// 开启血压检测模块
+	// Usart_SendByte(USART3, 0x8a);
 
 	char str[30];
 	if(USART_HRV_RX_BUF[71] != 0) high_pressure = USART_HRV_RX_BUF[71];
@@ -201,6 +213,8 @@ void hrv_display()
 	// 		OLED_ShowNum(100,20,USART_HRV_RX_BUF[67],2,16,1);	//微循环
 	// 		OLED_ShowNum(10,48,USART_HRV_RX_BUF[71],3,16,1);	//收缩压
 	// 		OLED_ShowNum(50,48,USART_HRV_RX_BUF[72],3,16,1);	//舒张压
+		// 开启血压检测模块
+	// Usart_SendByte(USART3, 0x8a);
 	char str[10];
 	if(USART_HRV_RX_BUF[72] != 0) hrv =  USART_HRV_RX_BUF[76];
 	sprintf((char *)str," HRV  ");

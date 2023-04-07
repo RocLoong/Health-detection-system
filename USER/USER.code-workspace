@@ -8,7 +8,11 @@
         "files.associations": {
             "usart.h": "c",
             "main.h": "c",
-            "oled.h": "c"
+            "oled.h": "c",
+            "algorithm.h": "c",
+            "myiic.h": "c",
+            "debug.h": "c",
+            "stdlib.h": "c"
         },
         "RTT_Studio.Build.Parallel_Jobs": "20",
         "RTT_Studio.Env_Location": "D:/RT-ThreadStudio/platform/env_released/env"

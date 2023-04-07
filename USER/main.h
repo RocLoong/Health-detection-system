@@ -2,7 +2,7 @@
  * @Author: Rocloong 63897185+RocLoong@users.noreply.github.com
  * @Date: 2023-03-26 09:39:56
  * @LastEditors: Rocloong 63897185+RocLoong@users.noreply.github.com
- * @LastEditTime: 2023-03-27 21:15:18
+ * @LastEditTime: 2023-04-05 12:01:12
  * @FilePath: \USER\main.h
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -38,6 +38,7 @@ typedef enum {
     DISPLAY_SPO2, 
     DISPLAY_PRESSURE, 
     DISPLAY_HRV,
+    DISPLAY_START,
 }DISPLAY_MODE;      
 
 
